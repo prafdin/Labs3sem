@@ -12,7 +12,7 @@ namespace c
 		double y;
 	};
 	double calculate_angle(RightLine first, RightLine second); 
-	RightLine create_line(Point a);
 	bool points_on_defferent_sides(RightLine main_line, Point a, Point b);
 	Point decussation_lines(RightLine first, RightLine second);
+	void print_point(Point point);
 }
