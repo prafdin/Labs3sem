@@ -12,10 +12,7 @@ namespace cpp
 
 		Point(double x, double y) : m_x(x), m_y(y) {}
 		~Point() {};
-		Point generate_nan_point() {
-			Point tmp(nan("1"), nan("1"));
-			return tmp;
-		}
+		
 		const double& get_x() const { return m_x; }
 		const double& get_y() const { return m_y; }
 		void print_point() {
@@ -40,15 +37,14 @@ namespace cpp
 		const double& get_c()  const { return m_c; }
 		const double& get_k()  const { return m_k; }
 		double calculate_angle(const RightLine& tmp) const;
+		static double calculate_angle(const RightLine& first, const RightLine& second);
 
 		
 	};
 
 	bool points_on_defferent_sides(const RightLine& line, const Point& a, const Point& b) ;
 	Point decussation_lines(const RightLine& first_line,const RightLine& second_line);
-	static Point generate_nan_point() {
-		Point tmp(nan("1"), nan("1"));
-		return tmp;
-	}
+	
+	
 
 }

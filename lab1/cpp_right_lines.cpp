@@ -10,6 +10,10 @@ bool cpp::points_on_defferent_sides(const RightLine& line, const Point& a, const
 	else
 		return false;
 }
+Point generate_nan_point() {
+	Point tmp(nan("1"), nan("1"));
+	return tmp;
+}
 double radian_to_degrees(double radin)
 {
 	const double PI = 3.14159f;
@@ -20,6 +24,10 @@ double RightLine::calculate_angle(const RightLine& tmp)const {
 	double angle_in_radian = atan((tmp.get_k() - m_k) / (1 + m_k * tmp.get_k()));
 	return radian_to_degrees(angle_in_radian);
 
+}
+static double calculate_angle(const RightLine& first, const RightLine& second) {
+	double angle_in_radian = atan((second.get_k() - first.get_k()) / (1 + first.get_k() * second.get_k()));
+	return radian_to_degrees(angle_in_radian);
 }
 Point find_solution_system(const RightLine& vector_1, const RightLine& vector_2)
 {

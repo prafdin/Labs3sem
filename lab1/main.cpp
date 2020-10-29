@@ -6,6 +6,7 @@
 
 const int size_mass = 100;
 const int code_sign_minus = 45;
+const int code_dot = 46;
 const int code_digit_0 = 48;
 const int code_digit_9 = 57;
 
@@ -14,7 +15,7 @@ double determinate_num(const char* ptr) {
 	size_t length_str = strlen(ptr) - 1;
 	for (int i = 0; i < length_str; i++)
 	{
-		if (ptr[i] > code_digit_9 || ptr[i] < code_digit_0 && ptr[0]!= code_sign_minus)
+		if (ptr[i] > code_digit_9 || ptr[i] < code_digit_0 && ptr[0]!= code_sign_minus  &&ptr[i] != code_dot)
 			return nan("1");
 	}
 	return strtod(ptr, NULL);
