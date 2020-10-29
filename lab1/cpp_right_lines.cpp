@@ -25,10 +25,6 @@ double RightLine::calculate_angle(const RightLine& tmp)const {
 	return radian_to_degrees(angle_in_radian);
 
 }
-static double calculate_angle(const RightLine& first, const RightLine& second) {
-	double angle_in_radian = atan((second.get_k() - first.get_k()) / (1 + first.get_k() * second.get_k()));
-	return radian_to_degrees(angle_in_radian);
-}
 Point find_solution_system(const RightLine& vector_1, const RightLine& vector_2)
 {
 

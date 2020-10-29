@@ -37,7 +37,6 @@ namespace cpp
 		const double& get_c()  const { return m_c; }
 		const double& get_k()  const { return m_k; }
 		double calculate_angle(const RightLine& tmp) const;
-		static double calculate_angle(const RightLine& first, const RightLine& second);
 
 		
 	};
