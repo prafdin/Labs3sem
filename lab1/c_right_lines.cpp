@@ -26,7 +26,7 @@ RightLine create_line(Point a)
 	tmp.c = 0;
 	return  tmp;
 }
-bool c::points_on_defferent_sides(RightLine main_line, Point first_point, Point second_point)
+bool c::points_on_different_sides(RightLine main_line, Point first_point, Point second_point)
 {
 	RightLine first_line = create_line(first_point);
 	RightLine second_line = create_line(second_point);

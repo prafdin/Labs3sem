@@ -42,3 +42,7 @@ Point cpp::decussation_lines(const RightLine& first_line, const RightLine& secon
 	else
 		return find_solution_system(first_line, second_line);
 }
+double RightLine::calculate_angle(const RightLine& first, const RightLine& second) {
+	double angle_in_radian = atan((second.get_k() -first.get_k()) / (1 + first.get_k() * second.get_k()));
+	return radian_to_degrees(angle_in_radian);
+}

@@ -46,7 +46,7 @@ void c_realization(double A1, double B1, double C1, double A2, double B2, double
 	printf("Angle between abscissa and first line :%lf\n", calculate_angle(abscissa, first_line));
 	printf("Angle between abscissa and second line :%lf\n", calculate_angle(abscissa, second_line));
 	printf("Angle between lines :%lf\n",calculate_angle(first_line, second_line));
-	if (points_on_defferent_sides(first_line, first_point, second_point) == true)
+	if (points_on_different_sides(first_line, first_point, second_point) == true)
 		printf("Points on defferent sides\n");
 	else 
 		printf("Points on one sides\n");

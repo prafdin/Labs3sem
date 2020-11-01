@@ -10,12 +10,10 @@ namespace cpp
 		double m_y;
 	public:
 
-		Point(double x, double y) : m_x(x), m_y(y) {}
-		~Point() {};
-		
-		const double& get_x() const { return m_x; }
-		const double& get_y() const { return m_y; }
-		void print_point() {
+		Point(double x, double y) : m_x(x), m_y(y) {}	
+		double get_x() const { return m_x; }
+		double get_y() const { return m_y; }
+		void print_point() const {
 			printf("x=%lf y=%lf\n", m_x, m_y);
 		}
 	};
@@ -31,13 +29,12 @@ namespace cpp
 			else
 				m_k = -a / b;
 		}
-		~RightLine() {};
-		const double& get_a()  const { return  m_point.get_x(); }
-		const double& get_b() const { return m_point.get_y(); }
+		double get_a()  const { return  m_point.get_x(); }
+		double get_b() const { return m_point.get_y(); }
 		const double& get_c()  const { return m_c; }
 		const double& get_k()  const { return m_k; }
 		double calculate_angle(const RightLine& tmp) const;
-
+		static double calculate_angle(const RightLine& first, const RightLine& second);
 		
 	};
 
