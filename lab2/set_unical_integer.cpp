@@ -32,18 +32,16 @@ void sui::del(int num, BinaryTree* &root) {
 	else {
 		
 		BinaryTree* tmp = root;
-		if (root->_parent == nullptr) {
-			root = nullptr;
-			delete tmp;
-			return;
-		}
+		
 		if (root->_left == nullptr) {
 			
 			transplant(root, root->_right);
+			tmp->_right = nullptr;
 			delete tmp;
 		}
 		else if (root->_right == nullptr) {
 			transplant(root, root->_left);
+			tmp->_left = nullptr;
 			delete tmp;
 		}
 		else {

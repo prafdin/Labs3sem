@@ -6,11 +6,11 @@
 
 
 int main(void) {
-	 sui::BinaryTree* t1= new  sui::BinaryTree(3, 0);
-	// t1->add(5);
-//	 t1->add(2);
-	// t1->add(4);
-	// t1->add(10);
-	sui::del(5, t1);
+	 sui::BinaryTree* t1= new  sui::BinaryTree(4, 0);
+	 t1->add(2);
+	 t1->add(7);
+	 t1->add(6);
+	 t1->add(5);
+	sui::del(7, t1);
 
 	}
