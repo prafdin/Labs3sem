@@ -17,16 +17,18 @@ namespace sui {
 			delete _right;
 
 		}
-		BinaryTree* get_min() {
+		BinaryTree* get_min(int a=0) {
 			while (_left != nullptr)
-				return  _left->get_min();
-			
-		}
-		BinaryTree* get_max() {
-			while (_right != nullptr)
-				_right->get_min();
+				return  _left->get_min(1);
 			return this;
 		}
+
+		BinaryTree* get_max() {
+			while (_right != nullptr)
+				return _right->get_max();
+			return this;
+		}
+		void recalculate_index();
 		 BinaryTree* get_left()  {
 			return _left;
 		}
