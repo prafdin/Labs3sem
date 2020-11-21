@@ -7,19 +7,19 @@ public:
 	explicit UniquePtr() : data(nullptr) {
 	}
 	explicit UniquePtr(T* const ptr) : data(ptr) { }
-	UniquePtr(UniquePtr& rhs) = delete;
-	UniquePtr(UniquePtr&& rhs) noexcept {
+	UniquePtr(const UniquePtr<T>& rhs) = delete;
+	UniquePtr(UniquePtr<T>&& rhs) noexcept {
 		data = rhs.data;
 		rhs.data = nullptr;
 	}
 	~UniquePtr() {
 		delete data;
 	}
-	UniquePtr& operator=(UniquePtr& rhs) = delete;
-	UniquePtr& operator=(UniquePtr&& rhs) noexcept {
+	UniquePtr<T>& operator=(const UniquePtr<T>& rhs) = delete;
+	UniquePtr<T>& operator=(UniquePtr<T>&& rhs) noexcept {
 		swap(data, rhs.data);
 	}
-	UniquePtr& operator=(nullptr_t) {
+	UniquePtr<T>& operator=(nullptr_t) {
 		delete data;
 		data = nullptr;
 	}
@@ -36,7 +36,7 @@ public:
 			delete data;
 		data = ptr;
 	}
-	void swap(UniquePtr& rhs) noexcept {
+	void swap(UniquePtr<T>& rhs) noexcept {
 		auto copy = data;
 		data = rhs.data;
 		rhs.data = copy;
@@ -66,10 +66,10 @@ bool operator==(const UniquePtr<T>& lhs, const UniquePtr<T>& rhs) {
 }
 template<typename T>
 bool operator!=(const UniquePtr<T>& lhs, const UniquePtr<T>& rhs) {
-	return lhs == rhs;
-	return false;
+	if  lhs == rhs;
+		return false;
 	else
-	return true;
+		return true;
 }
 template<typename T>
 bool operator<(const UniquePtr<T>& lhs, const UniquePtr<T>& rhs) {
