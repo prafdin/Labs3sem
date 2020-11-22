@@ -2,6 +2,7 @@
 #include <iostream>
 #include <utility>
 #include <vector>
+#include "vector.h"
 #include <algorithm>
 template <typename T>
 struct abc {
@@ -16,7 +17,7 @@ struct abc {
 
 struct temp {
 	int data;
-	temp (): data(0) {}
+	temp (int data=0): data(data) {}
 	temp(const temp& ptr) {
 		data = ptr.data;
 		printf("copy ctor");
@@ -25,26 +26,50 @@ struct temp {
 		data = ptr.data;
 		printf("copy ctor");
 	}
-	//temp(temp&& ptr) = delete; /* {
-	//	data = ptr.data;
-	//	printf("move ctor");
-	//}*/
+	temp(temp&& ptr) noexcept {
+		data = ptr.data;
+		printf("move ctor");
+	}
 	temp& operator=(const temp& ptr) {
 		data = ptr.data;
 		printf("copy assign");
 		return *this;
 	}
-	//temp& operator=( temp&& ptr) = delete;  /* {
-	//	data = ptr.data;
-	//	printf("move assign");
-	//	return *this;
-	//}*/
+	temp& operator=( temp&& ptr) noexcept {
+		data = ptr.data;
+		printf("move assign");
+		return *this;
+	}
+	~temp() {
+		printf("dtor");
+	}
 };
 int main()
 {
-	abc<temp> ptr1(3);
-	abc<temp> ptr2(4);
-	for (int i = 0; i < 3; ++i) {
-		std::swap(ptr1[i], ptr2[i]);
-	}
+	Vector<temp> a;
+	//std::vector<temp> a;
+	temp a1 = 1;
+	temp b = 2;
+	a.insert(a.begin(),a1 );
+	printf("\n");
+	a.insert(a.begin(),b );
+	printf("\n");
+	auto ptr1 = a.begin();
+//	std::cout << a[0] << std::endl;
+	auto  p = a.erase(a.begin());
+//	std::cout << a[0] << std::endl;
+	
+	
+	/*auto ptr = new std::vector<temp>();
+	ptr->size();
+	temp a = 1;
+	temp b = 2;
+	temp c = 3;
+	ptr->insert(ptr->begin(), a);
+	printf("\n");
+	ptr->insert(ptr->end()-1, b);
+	printf("\n");
+	ptr->insert(ptr->begin()+1, c);
+	printf("\n");
+	printf("%d %d %d", (*ptr)[0], (*ptr)[1], (*ptr)[2]);*/
 }

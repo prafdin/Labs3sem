@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.0)
+cmake_minimum_required (VERSION 3.8)
 
 project (Labs3sem)
 
@@ -11,6 +11,8 @@ if(MSVC) # Компилятор MSVC /W3
     endif()
     add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
     add_compile_options(/experimental:external /external:anglebrackets /external:W0)
+ 
+
 elseif(CMAKE_COMPILER_IS_GNUCC) # Компилятор GCC
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wconversion -Wextra -Wpedantic")
 endif()
