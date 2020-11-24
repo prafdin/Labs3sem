@@ -7,57 +7,9 @@ class List {
 		Node* _next;
 		Node* _prev;
 		Node(const T& data , Node * next, Node * prev  ) : _data(data), _next(next), _prev(prev) {}
-		Node(T&& data, Node* next , Node* prev ):_data(std::move_if_noexcept(data)), _next(next), _prev(prev){}
-		Node(const Node& ptr) : _data(ptr._data), _next(ptr._next), _prev(ptr._prev) {}
-		Node(Node&& ptr) : _data(std::move(ptr._data)), _next(ptr._next), _prev(ptr._prev) {}
-		struct NodeIterator {
-			Node* node;
-			NodeIterator(const NodeIterator& ptr) : node(ptr.node) { }
-			NodeIterator( NodeIterator&& ptr) : node(ptr.node) { }
-			NodeIterator(Node* ptr): node(ptr){ }
-			explicit operator bool() const {
-				return node != nullptr;
-			}
-			NodeIterator& operator++  () {
-				node = node->_next;
-				return *this;
-			}
-			NodeIterator& operator++ (int) {
-				auto copy = *this;
-				data = data->_next;
-				return copy;
-			}
-			NodeIterator& operator--() {
-				node = node->_prevl;
-				return *this;
-			}
-			NodeIterator& operator--(int) {
-				auto copy = *this;;
-				node = node->_prev;
-				return copy;
-			}
-			NodeIterator& operator=(const NodeIterator& ptr) {
-				node = ptr.node;
-				return *this;
-			}
-			NodeIterator& operator=( NodeIterator&& ptr) {
-				node = ptr.node;
-				return *this;
-			}
-			Node* operator*() {
-				return node;
-			}
-			 T* operator->() {
-				return node;
-			}
-			bool operator==(const NodeIterator& rhs) {
-				return node == rhs.node;
-			}
-			bool operator!=(const NodeIterator& rhs) {
-				return node != rhs.node;
-			}
-		};
+		
 	};
+	
 	Node* head;
 	Node* tail;
 	Node* dummy;
@@ -110,14 +62,13 @@ public:
 		head=dummy ;
 		tail=dummy;
 	}
-	List(const List<T>& rhs):dummy(rhs.dummy) {
-		auto dst = Node::NodeIterator(head);
-		
-		for (auto src = Node::NodeIterator(rhs.head); src; ++src) {
-			dst(*src);
+	List(const List<T>& rhs) {
+		auto src = NodeIterator(rhs.tail);
+		for (int i = 0; i < rhs.size; ++i) {
+			dst=new Node(*src);
 			++dst;
+			--src;
 		}
-		tail = &(*dst);
 	}
 	ConstListIterator begin() const {
 		return ConstListIterator(head);
