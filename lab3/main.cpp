@@ -3,6 +3,8 @@
 #include <utility>
 #include <vector>
 #include "vector.h"
+#include "list.h"
+#include <list>
 #include <algorithm>
 template <typename T>
 struct abc {
@@ -46,30 +48,17 @@ struct temp {
 };
 int main()
 {
-	Vector<temp> a;
-	//std::vector<temp> a;
-	temp a1 = 1;
-	temp b = 2;
-	a.insert(a.begin(),a1 );
-	printf("\n");
-	a.insert(a.begin(),b );
-	printf("\n");
-	auto ptr1 = a.begin();
-//	std::cout << a[0] << std::endl;
-	auto  p = a.erase(a.begin());
-//	std::cout << a[0] << std::endl;
+	int b = 1;
+	int c = 2;
+	std::list<int> abr;
+	List<int> abc;
 	
-	
-	/*auto ptr = new std::vector<temp>();
-	ptr->size();
-	temp a = 1;
-	temp b = 2;
-	temp c = 3;
-	ptr->insert(ptr->begin(), a);
-	printf("\n");
-	ptr->insert(ptr->end()-1, b);
-	printf("\n");
-	ptr->insert(ptr->begin()+1, c);
-	printf("\n");
-	printf("%d %d %d", (*ptr)[0], (*ptr)[1], (*ptr)[2]);*/
+	abr.insert(abr.begin(), b);
+	//abr.insert(abr.begin(), c);
+
+	abc.insert(abc.begin(),b);
+	abc.insert(abc.begin(), c);
+	auto abd = abc;
+	printf("%d %d\n", *abr.begin(), *++abr.begin());
+	printf("%d %d", *abd.begin(), *++abd.begin());
 }
