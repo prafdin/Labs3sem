@@ -62,13 +62,19 @@ public:
 		head=dummy ;
 		tail=dummy;
 	}
-	List(const List<T>& rhs) {
-		auto src = NodeIterator(rhs.tail);
-		for (int i = 0; i < rhs.size; ++i) {
-			dst=new Node(*src);
-			++dst;
-			--src;
+	List(const List<T>& rhs) : dummy(new Node(T(), nullptr, nullptr)) {
+		Node * src = rhs.tail;
+		dummy->_next = dummy;
+		Node* dst = dummy;
+		for (size_t i = 0; i < rhs.size; ++i) {
+			Node* tmp = new Node(src->_data, dst, nullptr);
+			dst->_prev = tmp;
+			src = src->_prev;
+			dst = tmp;
 		}
+		dst->_prev = dummy;
+		head = dst;
+		tail = dst->_prev->_prev;
 	}
 	ConstListIterator begin() const {
 		return ConstListIterator(head);

@@ -59,6 +59,6 @@ int main()
 	abc.insert(abc.begin(),b);
 	abc.insert(abc.begin(), c);
 	auto abd = abc;
-	printf("%d %d\n", *abr.begin(), *++abr.begin());
+//	printf("%d %d\n", *abr.begin(), *++abr.begin());
 	printf("%d %d", *abd.begin(), *++abd.begin());
 }
