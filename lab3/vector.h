@@ -9,9 +9,9 @@ class Vector {
 public:
 	Vector():data(nullptr),_size(0), _capacity(0) { }
 	Vector(const Vector<T>& ptr) {
-		data = new T[ptr.size];
-		size = ptr.size;
-		for (size_t i = 0; i < size; ++i) {
+		data = new T[ptr._size];
+		_size = ptr._size;
+		for (size_t i = 0; i < _size; ++i) {
 			data[i] = ptr[i];
 		}
 	}
@@ -45,10 +45,10 @@ public:
 	T& operator[](size_t index) {
 		return data[index];
 	}
-	const T* begin() const {
+	T* begin() const {
 		return data;
 	}
-	const T* end() const {
+	T* end() const {
 		return data + _size;
 	}
 	const T* insert(const T* pos, const T& value) {
@@ -59,6 +59,8 @@ public:
 			double new_size = _size == 0 ? 1 : ceil(_size * coefficient_capacity);
 			this->resize((size_t)new_size);
 		}
+		else
+			++_size;
 		auto insert_place = data + (_size - 1 - count_move); 
 		for (int i = (int)count_move; i > 0; --i) 
 			* (insert_place + i) = std::move_if_noexcept(*(insert_place + i - 1));

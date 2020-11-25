@@ -76,42 +76,42 @@ public:
 	}
 };
 template<typename T> 
-bool operator==(const SharePtr<T>& lhs, const SharePtr<T>& rhs) {
+bool operator==(const SharedPtr<T>& lhs, const SharedPtr<T>& rhs) {
 		if (lhs.get() == rhs.get())
 			return true;
 		else
 			return false;
 	}
 template<typename T>
-bool operator!=(const SharePtr<T>& lhs, const SharePtr<T>& rhs) {
+bool operator!=(const SharedPtr<T>& lhs, const SharedPtr<T>& rhs) {
 		if lhs == rhs;
 		return false;
 		else
 			return true;
 	}
 template<typename T>
-bool operator<(const SharePtr<T>& lhs, const SharePtr<T>& rhs) {
+bool operator<(const SharedPtr<T>& lhs, const SharedPtr<T>& rhs) {
 		if (lhs.get() < rhs.get())
 			return true;
 		else
 			return false;
 	}
 template<typename T>
-bool operator<=(const SharePtr<T>& lhs, const SharePtr<T>& rhs) {
+bool operator<=(const SharedPtr<T>& lhs, const SharedPtr<T>& rhs) {
 		if (lhs < rhs || lhs == rhs)
 			return true;
 		else
 			return false;
 	}
 template<typename T>
-bool operator>(const SharePtr<T>& lhs, const SharePtr<T>& rhs) {
+bool operator>(const SharedPtr<T>& lhs, const SharedPtr<T>& rhs) {
 		if (lhs.get() > rhs.get())
 			return true;
 		else
 			return false;
 	}
 template<typename T>
-bool operator>=(const SharePtr<T>& lhs, const SharePtr<T>& rhs) {
+bool operator>=(const SharedPtr<T>& lhs, const SharedPtr<T>& rhs) {
 		if (lhs > rhs || lhs == rhs)
 			return true;
 		else

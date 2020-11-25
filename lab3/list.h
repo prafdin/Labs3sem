@@ -1,5 +1,4 @@
 #pragma once 
-
 template<typename T>
 class List {
 	struct Node{
@@ -9,54 +8,58 @@ class List {
 		Node(const T& data , Node * next, Node * prev  ) : _data(data), _next(next), _prev(prev) {}
 		
 	};
-	
 	Node* head;
 	Node* tail;
 	Node* dummy;
-	size_t size;
+	size_t _size;
 public:
-	class ConstListIterator {
+	class ListIterator {
 		Node* node;
-		ConstListIterator( Node* ptr) : node(ptr) { }
+		ListIterator( Node* ptr) : node(ptr) { }
 		friend class List<T>;
 	public:
-		ConstListIterator& operator++  () {
+		ListIterator& operator++  () {
 			node = node->_next;
 			return *this;
 		}
-
-		ConstListIterator& operator++ (int) {
+		ListIterator& operator++ (int) {
 			auto copy = *this;
 			node = node->_next;
 			return copy;
 		}
-		ConstListIterator& operator--() {
+		ListIterator& operator+ (int count_iter) {
+			for (count_iter; count_iter; --count_iter) {
+				++*this;
+			}
+			return *this;
+		}
+		ListIterator& operator--() {
 			node = node->_prev;
 			return *this;
 		}
-		ConstListIterator& operator--(int) {
+		ListIterator& operator--(int) {
 			auto copy = *this;;
 			node = node->_prev;
 			return copy;
 		}
-		ConstListIterator& operator=(const ConstListIterator& ptr) {
+		ListIterator& operator=(const ListIterator& ptr) {
 			node = ptr.node;
 			return *this;
 		}
-		const T& operator*() {
+		T& operator*() {
 			return node->_data;
 		}
-		const T* operator->() {
+		T* operator->() {
 			return &(node->_data);
 		}
-		bool operator==(const ConstListIterator& rhs){
+		bool operator==(const ListIterator& rhs){
 			return node == rhs.node;
 		}
-		bool operator!=(const ConstListIterator& rhs) {
+		bool operator!=(const ListIterator& rhs) {
 			return node != rhs.node;
 		}
 	};
-	List() : dummy(new Node(T(), nullptr, nullptr)), size(0) {
+	List() : dummy(new Node(T(), nullptr, nullptr)), _size(0) {
 		dummy->_next = dummy;
 		dummy->_prev = dummy;
 		head=dummy ;
@@ -66,7 +69,7 @@ public:
 		Node * src = rhs.tail;
 		dummy->_next = dummy;
 		Node* dst = dummy;
-		for (size_t i = 0; i < rhs.size; ++i) {
+		for (size_t i = 0; i < rhs._size; ++i) {
 			Node* tmp = new Node(src->_data, dst, nullptr);
 			dst->_prev = tmp;
 			src = src->_prev;
@@ -75,14 +78,40 @@ public:
 		dst->_prev = dummy;
 		head = dst;
 		tail = dst->_prev->_prev;
+		_size = rhs._size;
 	}
-	ConstListIterator begin() const {
-		return ConstListIterator(head);
+	List(List<T>&& rhs) {
+		swap(*this, rhs);
 	}
-	ConstListIterator end() const {
-		return ConstListIterator(dummy);
+	~List() {
+		clear();
+		delete dummy;
 	}
-	ConstListIterator insert(ConstListIterator pos, const T& value) {
+	List<T>& operator=(const List<T>& rhs) {
+		auto temp(rhs);
+		swap(temp);
+		return *this;
+	}
+	List<T>& operator=(List<T>&& rhs) noexcept {
+		swap(rhs);
+		return *this;
+	}
+	size_t size() {
+		return _size;
+	}
+	void swap(List<T>& rhs) noexcept{
+		std::swap(head, rhs.head);
+		std::swap(tail, rhs.tail);
+		std::swap(dummy, rhs.dummy);
+		std::swap(_size, rhs._size);
+	}
+	ListIterator begin() const {
+		return ListIterator(head);
+	}
+	ListIterator end() const {
+		return ListIterator(dummy);
+	}
+	ListIterator insert(ListIterator pos, const T& value) {
 		auto node = pos.node;
 		Node* tmp = nullptr;
 		if (pos == this->begin()) {
@@ -99,10 +128,10 @@ public:
 		}
 		else
 			node->_prev = tmp;
-		++size;
+		++_size;
 		return --pos;
 	}
-	ConstListIterator erase(ConstListIterator pos) {
+	ListIterator erase(ListIterator pos) {
 		if (pos == this->end()) 
 			return dummy;
 		else {
@@ -119,19 +148,20 @@ public:
 				tail = head;
 			}
 			++pos;
-			--size;
+			--_size;
 			delete node;		
 			return pos;
 		}	
 	}
 	void clear() {
-		for (int i = 0; i < size; ++i) {
+		for (int i = 0; i < _size; ++i) {
 			auto tmp = head;
 			head = head->_next;
 			delete tmp;
 		}
-		size = 0;
+		_size = 0;
 		tail = head;
 		dummy->_prev = dummy;
 	}
+	
 };
