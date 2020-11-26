@@ -9,8 +9,8 @@
 #include"unique_ptr.h"
 #include"shared_ptr.h"
 
-template<class T> using UniquePtrType = UniquePtr<T>;
-template<class T> using SharedPtrType = SharedPtr<T>;
+template<class T> using UniquePtrType = std::unique_ptr<T>;
+template<class T> using SharedPtrType = std::shared_ptr<T>;
 template<class T> using CollectionType =std::vector<T>;
 class Item
 {
@@ -63,8 +63,8 @@ int main()
 			std::cout << "Killing second shared pointer\n";
 		}
 		std::cout << "Killing first shared pointer\n";
-		std::cout << "\n\n";
 	}
+	std::cout << "\n\n";
 	{
 		std::cout << "Create first unique pointer on Item\n";
 		auto ptr1 = UniquePtrType<Item>(new Item());

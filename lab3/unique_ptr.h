@@ -18,10 +18,12 @@ public:
 	UniquePtr<T>& operator=(const UniquePtr<T>& rhs) = delete;
 	UniquePtr<T>& operator=(UniquePtr<T>&& rhs) noexcept {
 		swap(data, rhs.data);
+		return *this;
 	}
 	UniquePtr<T>& operator=(nullptr_t) {
 		delete data;
 		data = nullptr;
+		return *this;
 	}
 	const T* get() const {
 		return data;
