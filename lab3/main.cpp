@@ -29,7 +29,7 @@ void print_collection(const CollectionType<T>& first) {
 template<typename T>
 void fill_collection(CollectionType<T>& first, size_t count, bool preorder) {
 	for (int i = 0; i < count; ++i) {
-		first.insert(first.begin(), preorder ? i : (count - i-1));
+		first.insert(first.begin(), preorder ? i : ((int)count - i-1));
 	}
 }
 template<typename T>

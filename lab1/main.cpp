@@ -96,9 +96,5 @@ void input_data(double* A1, double* B1, double* C1, double* A2, double* B2, doub
 
 
 int main(void) {
-	double A1, B1, C1, A2, B2, C2, x1, y1, x2, y2 = 0;
-	input_data(&A1, &B1, &C1, &A2, &B2, &C2, &x1, &y1, &x2, &y2);
-	c_realization(A1, B1, C1, A2, B2, C2, x1, y1, x2, y2);
-	cpp_realiztaion(A1, B1, C1, A2, B2, C2, x1, y1, x2, y2);
-
+	
 }
