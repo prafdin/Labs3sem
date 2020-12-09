@@ -4,11 +4,11 @@
 #include <sstream>
 #include<memory>
 #include "functions.h"
-int RAND_RANG = 100;
+int RAND_RANGE = 100;
 int CODE_LEFT = 37;
 int CODE_RIGHT = 39;
 using node = std::pair <size_t, std::shared_ptr<OneVaribleFunction>>;
-using iterator = std::vector<node>::const_iterator;
+using const_iterator = std::vector<node>::const_iterator;
 typedef enum { CreateObject = 1, PushBack, DelObject, DelAll, Equals, Print, CalculateFunc, DerivativeFunc }ItemMainMenu;
 typedef enum { CreateConstF = 1, CreateLineF, CreateQuadraticF, CreateSinF, CreateCosF }ItemCreateMenu;
 template <typename T>
@@ -36,11 +36,11 @@ T input_digit(T left_bound = std::numeric_limits<T>::min(), T right_bound = std:
 	}
 	return data;
 }
-iterator find_pos(const iterator begin, const iterator end, size_t index);
+const_iterator find_pos(const const_iterator begin, const const_iterator end, size_t index);
 bool cmp_ordering(const node& lhs, const node& rhs);
 template<typename T>
 void create_object(std::vector<node>& vector, size_t index, T* object) {
-	vector.push_back(std::make_pair(index, std::shared_ptr<T>(object))); //make_unique ??
+	vector.push_back(std::make_pair(index, std::shared_ptr<T>(object))); 
 	std::sort(vector.begin(), vector.end(), cmp_ordering);
 }
 size_t choose_index(const std::vector<node>& vector) {
@@ -129,19 +129,19 @@ OneVaribleFunction* create_rand_func() {
 	auto func = CreateConstF + rand() % CreateCosF;
 	switch (func) {
 	case CreateConstF: {
-		return new ConstantFunction(rand() % RAND_RANG);
+		return new ConstantFunction(rand() % RAND_RANGE);
 	}
 	case CreateLineF: {
-		return new LineFunction(rand() % RAND_RANG, rand() % RAND_RANG);
+		return new LineFunction(rand() % RAND_RANGE, rand() % RAND_RANGE);
 	}
 	case CreateQuadraticF: {
-		return new QuadraticFunction(rand() % RAND_RANG, rand() % RAND_RANG, rand() % RAND_RANG);
+		return new QuadraticFunction(rand() % RAND_RANGE, rand() % RAND_RANGE, rand() % RAND_RANGE);
 	}
 	case CreateSinF: {
-		return new SinFunction(rand() % RAND_RANG, rand() % RAND_RANG, rand() % RAND_RANG, rand() % RAND_RANG);
+		return new SinFunction(rand() % RAND_RANGE, rand() % RAND_RANGE, rand() % RAND_RANGE, rand() % RAND_RANGE);
 	}
 	case CreateCosF: {
-		return new CosFunction(rand() % RAND_RANG, rand() % RAND_RANG, rand() % RAND_RANG, rand() % RAND_RANG);
+		return new CosFunction(rand() % RAND_RANGE, rand() % RAND_RANGE, rand() % RAND_RANGE, rand() % RAND_RANGE);
 	}
 	}
 	return nullptr;
@@ -186,9 +186,9 @@ int main(void) {
 				break;
 			std::cout << "First: ";
 			size_t first_index = choose_index(vector);
+			auto first_pos = find_pos(vector.begin(), vector.end(), first_index);
 			std::cout << "Second: ";
 			size_t second_index = choose_index(vector);
-			auto first_pos = find_pos(vector.begin(), vector.end(), first_index);
 			auto second_pos = find_pos(vector.begin(), vector.end(), second_index);
 			if (first_pos->second->equals(*second_pos->second))
 				std::cout << "Object are equal" << std::endl;
@@ -242,17 +242,13 @@ int main(void) {
 					break;
 				}
 			}
-
 		}
 		}
-
 	}
 }
-
-
-iterator find_pos(iterator begin,iterator end, size_t index) {
-	iterator pos = end;
-	for (iterator i = begin; i != end; ++i) {
+const_iterator find_pos(const_iterator begin,const_iterator end, size_t index) {
+	const_iterator pos = end;
+	for (const_iterator i = begin; i != end; ++i) {
 		if (index == i->first)
 			pos = i;
 	}
