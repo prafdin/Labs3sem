@@ -38,10 +38,14 @@ void  reverse( CollectionType<T>& collection ) {
 }
 int main()
 {
+
 	{
 		CollectionType<int> first;
 		CollectionType<int> second;
 		fill_collection(first, 10, true);
+		print_collection(first);
+		first.erase(first.begin());
+		print_collection(first);
 		fill_collection(second, 10, false);
 		std::cout << "First collection: ";
 		print_collection(first);

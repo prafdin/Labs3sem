@@ -4,11 +4,25 @@
 #include <sstream>
 #include<memory>
 #include "functions.h"
+
 int RAND_RANGE = 100;
-int CODE_LEFT = 37;
-int CODE_RIGHT = 39;
-using node = std::pair <size_t, std::shared_ptr<OneVaribleFunction>>;
+
+using node = std::pair <size_t, std::unique_ptr<OneVaribleFunction>>;
 using const_iterator = std::vector<node>::const_iterator;
+
+
+//std::shared_ptr<OneVaribleFunction> get_min_derivative(const std::vector<node> &vector,double arg) {
+//	if (vector.size() == 0)
+//		return nullptr;
+//	auto tmp = vector.begin()->second;
+//	
+//	for (auto iterator = ++vector.begin();iterator!=vector.end(); ++iterator) {
+//		if (tmp->derivative()->value(arg) > iterator->second->derivative()->value(arg))
+//			tmp = iterator->second;
+//	}
+//	return tmp;
+//}
+
 typedef enum { CreateObject = 1, PushBack, DelObject, DelAll, Equals, Print, CalculateFunc, DerivativeFunc }ItemMainMenu;
 typedef enum { CreateConstF = 1, CreateLineF, CreateQuadraticF, CreateSinF, CreateCosF }ItemCreateMenu;
 template <typename T>
@@ -40,7 +54,7 @@ const_iterator find_pos(const const_iterator begin, const const_iterator end, si
 bool cmp_ordering(const node& lhs, const node& rhs);
 template<typename T>
 void create_object(std::vector<node>& vector, size_t index, T* object) {
-	vector.push_back(std::make_pair(index, std::shared_ptr<T>(object))); 
+	vector.push_back(std::make_pair(index, std::unique_ptr<T>(object))); 
 	std::sort(vector.begin(), vector.end(), cmp_ordering);
 }
 size_t choose_index(const std::vector<node>& vector) {
@@ -165,7 +179,7 @@ int main(void) {
 			srand((unsigned int)time(0));
 			for (size_t i = 0; i < quantity; ++i) {
 				auto func = create_rand_func();
-				vector.push_back(std::make_pair(last_index + i, std::shared_ptr<OneVaribleFunction>(func)));
+				vector.push_back(std::make_pair(last_index + i, std::unique_ptr<OneVaribleFunction>(func)));
 			}
 			break;
 		}
@@ -234,8 +248,10 @@ int main(void) {
 			std::string choice;
 			while (true) {
 				getline(std::cin, choice);
-				if (choice == "n")
+				if (choice == "n") {
+					delete der;
 					break;
+				}
 				else if (choice == "y") {
 					size_t index = input_index(vector);
 					create_object(vector, index, der);
