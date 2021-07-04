@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include "c_right_lines.h"
+#include "c_straight_lines.h"
 #include "math.h"
 using namespace c;
 

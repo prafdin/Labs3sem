@@ -1,8 +1,8 @@
 #include <cstdio>
 #include "cmath"
 #include <cstring>
-#include "c_right_lines.h"
-#include "cpp_right_lines.h"
+#include "c_straight_lines.h"
+#include "cpp_straight_lines.h"
 
 const int size_mass = 100;
 const int code_sign_minus = 45;

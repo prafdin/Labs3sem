@@ -1,4 +1,4 @@
-#include "cpp_right_lines.h"
+#include "cpp_straight_lines.h"
 #include "math.h"
 using namespace cpp;
 bool cpp::points_on_defferent_sides(const RightLine& line, const Point& a, const Point& b)
