@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.8)
 
-project(lab1)
+project (lab1)
 
-add_library(c_straight_lines "c_straight_lines.cpp")
-add_library(cpp_straight_lines "cpp_straight_lines.cpp")
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+add_subdirectory(googletest)
 
-add_executable(lab1 "main.cpp")
 
-target_link_libraries(lab1 c_straight_lines cpp_straight_lines)
+add_subdirectory (straight_lines)
+add_subdirectory (straight_lines_test)
+

@@ -176,7 +176,7 @@ int main(void) {
 			std::cout << "Enter quantity of objects:";
 			size_t quantity = input_digit<size_t>(0, std::numeric_limits<size_t>::max());
 			size_t last_index = vector.size() == 0 ? 0 : ++(--vector.end())->first;
-			srand((unsigned int)time(0));
+			srand(0);
 			for (size_t i = 0; i < quantity; ++i) {
 				auto func = create_rand_func();
 				vector.push_back(std::make_pair(last_index + i, std::unique_ptr<OneVaribleFunction>(func)));

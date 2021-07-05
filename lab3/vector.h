@@ -15,7 +15,7 @@ public:
 			data[i] = ptr[i];
 		}
 	}
-	Vector(Vector<T>&& ptr) noexcept : data(ptr.data), size(ptr.size) {
+	Vector(Vector<T>&& ptr) noexcept : data(ptr.data), size(ptr.size()) {
 		ptr.data = nullptr;
 		ptr.size = 0;
 	}
